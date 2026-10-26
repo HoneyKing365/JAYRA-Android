@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JAYRA Companion</string>
+    <string name="accessibility_description">Lets the JAYRA desktop assistant you paired with run a small allow-list of actions (Back, Home, Notifications, Quick Settings, and tap/focus/scroll on one specific control) and report which app is in front. It does not read passwords, the clipboard, notifications or on-screen text unless you switch on limited text sharing. Actions that send, buy, delete or change account settings need your approval on the phone. You can pause or turn it off at any time.</string>
+</resources>
