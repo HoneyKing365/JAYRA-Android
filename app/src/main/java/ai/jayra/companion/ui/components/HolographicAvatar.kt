@@ -7,6 +7,7 @@ import ai.jayra.companion.theme.JayraEmeraldSuccess
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
@@ -43,21 +44,43 @@ fun HolographicAvatar(state: String, emotion: String, level: Float, modifier: Mo
         "speaking" -> JayraCyanPrimary
         else -> JayraCyanPrimary.copy(alpha = 0.78f)
     }
-    val smooth by animateFloatAsState(level.coerceIn(0f, 1f), tween(90), label = "avatarLevel")
+    val smooth by animateFloatAsState(targetValue = level.coerceIn(0f, 1f), animationSpec = tween(90), label = "avatarLevel")
     val upbeat = emotion in setOf("happy", "excited", "joy", "playful")
     val t = rememberInfiniteTransition(label = "avatar")
-    val spin by t.animateFloat(0f, 360f, infiniteRepeatable(tween(14_000, easing = LinearEasing)), label = "spin")
-    val spin2 by t.animateFloat(360f, 0f, infiniteRepeatable(tween(9_000, easing = LinearEasing)), label = "spin2")
+    
+    val spin by t.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(tween(14_000, easing = LinearEasing)),
+        label = "spin"
+    )
+    val spin2 by t.animateFloat(
+        initialValue = 360f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(tween(9_000, easing = LinearEasing)),
+        label = "spin2"
+    )
     val pulse by t.animateFloat(
-        0.93f, 1.07f,
-        infiniteRepeatable(
+        initialValue = 0.93f,
+        targetValue = 1.07f,
+        animationSpec = infiniteRepeatable(
             tween(if (state == "thinking") 650 else if (upbeat) 1100 else 1800, easing = FastOutSlowInEasing),
             RepeatMode.Reverse
         ),
         label = "pulse"
     )
-    val phase by t.animateFloat(0f, (2 * PI).toFloat(), infiniteRepeatable(tween(2_200, easing = LinearEasing)), label = "phase")
-    val scan by t.animateFloat(-1f, 1f, infiniteRepeatable(tween(3_200, easing = LinearEasing), RepeatMode.Reverse), label = "scan")
+    val phase by t.animateFloat(
+        initialValue = 0f,
+        targetValue = (2 * PI).toFloat(),
+        animationSpec = infiniteRepeatable(tween(2_200, easing = LinearEasing)),
+        label = "phase"
+    )
+    val scan by t.animateFloat(
+        initialValue = -1f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(3_200, easing = LinearEasing), RepeatMode.Reverse),
+        label = "scan"
+    )
 
     Canvas(modifier.aspectRatio(1f)) {
         val c = center
