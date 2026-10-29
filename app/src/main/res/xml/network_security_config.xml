@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The JAYRA desktop gateway speaks plain http:// and ws:// on the local network.
+  Android cannot express "private IP ranges only" in XML, so cleartext is allowed here
+  and the app itself refuses to talk to any non-LAN host (see util/NetUtil.isPrivateLan).
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

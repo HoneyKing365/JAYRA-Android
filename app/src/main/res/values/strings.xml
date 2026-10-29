@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JAYRA Deck</string>
+    <string name="accessibility_service_label">JAYRA Companion Control</string>
+    <string name="accessibility_service_description">Lets your JAYRA desktop assistant inspect the current screen and perform taps, scrolls and navigation on this phone when you ask it to. Password and PIN fields are never read.</string>
+</resources>
